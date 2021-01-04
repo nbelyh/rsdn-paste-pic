@@ -71,17 +71,17 @@
                 callback(errorTextNode.textContent);
             }
           }, function (err) {
-            console.error(err);
+            console.error('Cannot read upload file page content', err);
           })
         }, function (err) {
-          console.error(err);
+          console.error('Failed to upload file (POST filaed):', fileListUrl, err);
         })
       }, function (err) {
-        console.error(err);
+        console.error('Failed to read files page content:', err);
       });
 
     }, function (err) {
-      console.error(err);
+      console.error('Failed to get files page (GET filaed):', fileListUrl, err);
     })
   }
 
@@ -167,6 +167,42 @@
     }
   }
 
+  function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'successful' : 'unsuccessful';
+      // console.log('Fallback: Copying text command was ' + msg);
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
+    }
+
+    document.body.removeChild(textArea);
+  }
+
+  function copyTextToClipboard(text) {
+    if (!navigator.clipboard) {
+      fallbackCopyTextToClipboard(text);
+      return;
+    }
+    navigator.clipboard.writeText(text).then(function() {
+      // console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+      console.error('Async: Could not copy text: ', err);
+    });
+  }
+  
   /**
    * copy link handler
    */
@@ -197,12 +233,11 @@
     a.onclick = function (evt) {
       if (!evt.ctrlKey && !evt.shiftKey) {
         evt.preventDefault();
-        navigator.clipboard.writeText(href).then(function () {
-          tip.style.display = "block";
-          setTimeout(function () {
-            tip.style.display = "none";
-          }, 3000);
-        })
+        copyTextToClipboard(href);
+        tip.style.display = "block";
+        setTimeout(function () {
+          tip.style.display = "none";
+        }, 3000);
         return false;
       }
     }

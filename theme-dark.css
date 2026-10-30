@@ -1,0 +1,320 @@
+/* ============================================================================
+   RSDN dark theme — "GitHub Dimmed"-style palette.
+   Replaces the "Терминал v2..v7" sections of /Content/Dark/dark.css.
+   Selectors use html:root[data-theme="dark"] (one notch more specific than
+   dark.css) so this file wins even when it loads BEFORE dark.css.
+   Quickest drop-in: append this block at the very END of dark.css
+   (it overrides the terminal rules); cleaner: delete everything from
+   "Палитра "терминал" v2" to the end and append this instead.
+   ========================================================================== */
+
+html:root[data-theme="dark"] {
+  --bg:        #1c2128;  /* page */
+  --surface:   #22272e;  /* message body, panels */
+  --surface-2: #2d333b;  /* headers, toolbars, table heads */
+  --surface-3: #373e47;  /* hover */
+  --border:    #444c56;
+  --text:      #cdd9e5;  /* 10.5:1 on surface */
+  --text-strong:#e6edf3;
+  --muted:     #909dab;  /* 5.4:1 */
+  --link:      #6cb6ff;  /* 7.0:1 */
+  --link-visited:#b083f0;/* 5.3:1 */
+  --link-hover:#ff938a;
+  --accent:    #316dca;
+  --sel-bg:    #264a6b;  /* current message row, 7.8:1 with text-strong */
+  --quote-bg:  #2e2b1f;
+  --quote-border:#6c5a24;
+  --quote-text:#7ee787;  /* "VD>" lines */
+  --code-bg:   #1c2128;
+  --code-text: #d1d9e0;
+  --kw:        #6cb6ff;
+  --com:       #8b98a5;
+  --str:       #96d0ff;
+  --danger:    #f47067;
+  --warn-text: #e0c46c;
+
+  background-color: var(--bg);
+  color-scheme: dark;
+}
+
+/* ---- base ---- */
+html:root[data-theme="dark"] body,
+html:root[data-theme="dark"] .main,
+html:root[data-theme="dark"] #top-main,
+html:root[data-theme="dark"] #top-header-main,
+html:root[data-theme="dark"] .window { background-color: var(--bg); color: var(--text); }
+html:root[data-theme="dark"] h1, html:root[data-theme="dark"] h2,
+html:root[data-theme="dark"] h3, html:root[data-theme="dark"] h4,
+html:root[data-theme="dark"] h1 b, html:root[data-theme="dark"] h2 b, html:root[data-theme="dark"] h3 b,
+html:root[data-theme="dark"] #info-page-title { color: var(--text-strong); }
+html:root[data-theme="dark"] hr { border-top-color: var(--border); }
+html:root[data-theme="dark"] .top-hr { background-color: var(--accent); }
+html:root[data-theme="dark"] ::selection { background-color: var(--accent); color: #fff; }
+
+/* ---- links ---- */
+html:root[data-theme="dark"] a,
+html:root[data-theme="dark"] #toc-body a, html:root[data-theme="dark"] body.toc a,
+html:root[data-theme="dark"] .top-menu a, html:root[data-theme="dark"] .top-account-menu a,
+html:root[data-theme="dark"] .footer2 .footer-column a { color: var(--link); border-bottom-color: rgba(108,182,255,.35); }
+html:root[data-theme="dark"] a:visited,
+html:root[data-theme="dark"] #toc-body a:visited, html:root[data-theme="dark"] body.toc a:visited { color: var(--link-visited); }
+html:root[data-theme="dark"] a:hover,
+html:root[data-theme="dark"] #toc-body a:hover, html:root[data-theme="dark"] body.toc a:hover { color: var(--link-hover); }
+html:root[data-theme="dark"] a.hdr:not(:hover), html:root[data-theme="dark"] span.hdr { color: var(--text-strong); }
+html:root[data-theme="dark"] .profile-tip, html:root[data-theme="dark"] .profile-tip-new,
+html:root[data-theme="dark"] .ip-addr { color: var(--link); }
+html:root[data-theme="dark"] #toc-body, html:root[data-theme="dark"] body.toc,
+html:root[data-theme="dark"] #ULRoot, html:root[data-theme="dark"] li { color: var(--text); }
+html:root[data-theme="dark"] a.Current, html:root[data-theme="dark"] a .Current { background-color: var(--sel-bg); color: var(--text-strong); }
+
+/* ---- forms ---- */
+html:root[data-theme="dark"] input[type="text"], html:root[data-theme="dark"] input[type="password"],
+html:root[data-theme="dark"] input[type="email"], html:root[data-theme="dark"] input[type="number"],
+html:root[data-theme="dark"] input[type="search"], html:root[data-theme="dark"] input[type="url"],
+html:root[data-theme="dark"] input[type="date"], html:root[data-theme="dark"] select,
+html:root[data-theme="dark"] textarea, html:root[data-theme="dark"] .all-text-input
+  { background-color: var(--bg); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] input[type="submit"], html:root[data-theme="dark"] input[type="button"],
+html:root[data-theme="dark"] button { background-color: var(--surface-2); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] input[type="submit"]:hover, html:root[data-theme="dark"] input[type="button"]:hover,
+html:root[data-theme="dark"] button:hover { background-color: var(--surface-3); }
+html:root[data-theme="dark"] input[disabled], html:root[data-theme="dark"] textarea[disabled],
+html:root[data-theme="dark"] select[disabled], html:root[data-theme="dark"] .all-text-input[disabled]
+  { background-color: var(--surface); color: var(--muted); }
+html:root[data-theme="dark"] fieldset { border-color: var(--border); }
+html:root[data-theme="dark"] .err-msg { background-color: #3d1f22; color: #ffb3ad; }
+html:root[data-theme="dark"] .input-validation-error { background-color: #3d1f22; }
+
+/* ---- message list (left/bottom frame) ---- */
+html:root[data-theme="dark"] #tbl tr.even { background-color: var(--surface); }
+html:root[data-theme="dark"] #tbl tr.odd  { background-color: var(--bg); }
+html:root[data-theme="dark"] #tbl a:link, html:root[data-theme="dark"] .list-hdr a:link { color: var(--text); }
+html:root[data-theme="dark"] #tbl a:visited, html:root[data-theme="dark"] .list-hdr a:visited { color: var(--muted); }
+html:root[data-theme="dark"] #tbl a:hover, html:root[data-theme="dark"] .list-hdr a:hover { color: var(--text-strong); }
+html:root[data-theme="dark"] #tbl td.s, html:root[data-theme="dark"] #tbl td.n0, html:root[data-theme="dark"] #tbl td.lm0
+  { background-color: var(--sel-bg); color: var(--text-strong); border-top: 0; border-bottom: 0; }
+html:root[data-theme="dark"] #tbl tr.rsdn-sel td
+  { background-color: var(--sel-bg) !important; color: var(--text-strong) !important; font-weight: bold;
+    border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent); }
+html:root[data-theme="dark"] #tbl tr.rsdn-sel a,
+html:root[data-theme="dark"] #tbl tr.rsdn-sel a:visited { color: var(--text-strong) !important; }
+
+/* ---- tables / grids ---- */
+html:root[data-theme="dark"] table.grid td, html:root[data-theme="dark"] .info-page-content table td,
+html:root[data-theme="dark"] td.main-cell, html:root[data-theme="dark"] tr.gi td, html:root[data-theme="dark"] tr.gp td
+  { background-color: var(--surface); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] .even, html:root[data-theme="dark"] .info-page-content table tr.even td,
+html:root[data-theme="dark"] .poll .choices .even td, html:root[data-theme="dark"] .poll .voters .even td
+  { background-color: var(--bg); }
+html:root[data-theme="dark"] th, html:root[data-theme="dark"] table.grid th, html:root[data-theme="dark"] th.ghr,
+html:root[data-theme="dark"] tr.gh td, html:root[data-theme="dark"] tr.gh th,
+html:root[data-theme="dark"] .info-page-content table th, html:root[data-theme="dark"] .poll .choices th
+  { background-color: var(--surface-2); border-color: var(--border); color: var(--text-strong); }
+html:root[data-theme="dark"] #fileTable th { color: var(--text-strong) !important; }
+html:root[data-theme="dark"] #fileTable { border-color: var(--border); }
+html:root[data-theme="dark"] table.info-table tr[style*="background-color"],
+html:root[data-theme="dark"] .info-page-content tr[style*="background-color"] { background-color: var(--bg) !important; }
+html:root[data-theme="dark"] table.info-table td.weekend { background-color: #2a2433; }
+html:root[data-theme="dark"] table.info-table td.max { background-color: #1f3a2a; color: var(--text-strong); }
+
+/* ---- panels, menus, popups, jQuery UI ---- */
+html:root[data-theme="dark"] .info-box, html:root[data-theme="dark"] .box,
+html:root[data-theme="dark"] .box.rta-box, html:root[data-theme="dark"] .box.adv-box-right { border-color: var(--border); }
+html:root[data-theme="dark"] .info-box .box-title, html:root[data-theme="dark"] .box .box-title,
+html:root[data-theme="dark"] .cluetip-jtip .ui-cluetip-header { background-color: var(--surface-2); color: var(--text-strong); border-color: var(--border); }
+html:root[data-theme="dark"] .box.rta-box .box-title { background-color: #5a3d1e; }
+html:root[data-theme="dark"] .box.adv-box-right .box-title { background-color: #2b4a36; }
+html:root[data-theme="dark"] .box .box-content, html:root[data-theme="dark"] .info-box ul.refs,
+html:root[data-theme="dark"] .overlay, html:root[data-theme="dark"] .cluetip-jtip .cluetip-inner,
+html:root[data-theme="dark"] .cluetip-jtip .cluetip-outer,
+html:root[data-theme="dark"] #account-submenu, html:root[data-theme="dark"] #more-menu-content,
+html:root[data-theme="dark"] #account-menu-content, html:root[data-theme="dark"] .tooltipster-sidetip .tooltipster-box,
+html:root[data-theme="dark"] .rate-bar, html:root[data-theme="dark"] .info-page-header
+  { background-color: var(--surface); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] .tooltipster-sidetip .tooltipster-content { color: var(--text); }
+html:root[data-theme="dark"] .menu-item:hover, html:root[data-theme="dark"] .menu-item:hover i,
+html:root[data-theme="dark"] .top-menu a:hover, html:root[data-theme="dark"] .top-account-menu a:hover
+  { background-color: var(--accent); color: #fff !important; }
+html:root[data-theme="dark"] .ui-widget-content { background: var(--surface); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] .ui-widget-header { background: var(--surface-2); border-color: var(--border); color: var(--text-strong); }
+html:root[data-theme="dark"] .ui-state-default, html:root[data-theme="dark"] .ui-widget-content .ui-state-default,
+html:root[data-theme="dark"] .ui-widget-header .ui-state-default, html:root[data-theme="dark"] .ui-button
+  { background: var(--surface-2); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] .ui-state-hover, html:root[data-theme="dark"] .ui-widget-content .ui-state-hover,
+html:root[data-theme="dark"] .ui-button:hover { background: var(--surface-3); color: var(--text-strong); }
+html:root[data-theme="dark"] .ui-state-active { background: var(--accent); color: #fff; }
+html:root[data-theme="dark"] .ui-tabs .ui-tabs-panel, html:root[data-theme="dark"] .info-page-content .ui-tabs .ui-tabs-nav { background: var(--bg); }
+html:root[data-theme="dark"] .info-page-content .ui-tabs .ui-tabs-nav li a { background-color: var(--surface-2); color: var(--muted); border-right-color: var(--bg); }
+html:root[data-theme="dark"] .info-page-content .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor { color: var(--text-strong); border-color: var(--border); }
+
+/* ---- top frame, tree ---- */
+html:root[data-theme="dark"] .h-bevel { border-top-color: var(--border); border-bottom-color: #111418; }
+html:root[data-theme="dark"] .v-bevel, html:root[data-theme="dark"] .tb-separator { border-left-color: var(--border); border-right-color: #111418; }
+html:root[data-theme="dark"] #account-name, html:root[data-theme="dark"] #reg-box { color: var(--text); }
+html:root[data-theme="dark"] #login-box label, html:root[data-theme="dark"] #login-ext { color: var(--muted); }
+html:root[data-theme="dark"] #banner-box { background-color: var(--bg); border-color: var(--border); }
+html:root[data-theme="dark"] #tree-toolbar, html:root[data-theme="dark"] .msg-toolbar { background-color: var(--surface-2); border-color: var(--border); }
+html:root[data-theme="dark"] #hide-marker { background-color: var(--surface-3); }
+html:root[data-theme="dark"] div.loadMsg { background-color: var(--surface); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] frameset, html:root[data-theme="dark"] frame { border-color: var(--border); }
+
+/* ---- message page ---- */
+html:root[data-theme="dark"] .msg-hdr, html:root[data-theme="dark"] .msg-hdr .subj,
+html:root[data-theme="dark"] .msg-hdr .right-tb, html:root[data-theme="dark"] .header,
+html:root[data-theme="dark"] td.s, html:root[data-theme="dark"] .m td.s
+  { background-color: var(--surface-2); border-color: var(--border); color: var(--text-strong); }
+html:root[data-theme="dark"] td.th, html:root[data-theme="dark"] td.the, html:root[data-theme="dark"] td.t,
+html:root[data-theme="dark"] .m td.th, html:root[data-theme="dark"] .m td.the, html:root[data-theme="dark"] .m td.t,
+html:root[data-theme="dark"] .m .nml, html:root[data-theme="dark"] .m .nm,
+html:root[data-theme="dark"] td.i, html:root[data-theme="dark"] td.ii, html:root[data-theme="dark"] td.ig,
+html:root[data-theme="dark"] .m td.i, html:root[data-theme="dark"] .m td.ii, html:root[data-theme="dark"] .m td.ig
+  { background-color: var(--surface); border-color: var(--border); color: var(--muted); }
+html:root[data-theme="dark"] td.m, html:root[data-theme="dark"] td.pvw, html:root[data-theme="dark"] .m td.m,
+html:root[data-theme="dark"] .m td.pvw, html:root[data-theme="dark"] .m div.m, html:root[data-theme="dark"] div.m,
+html:root[data-theme="dark"] .msg-body, html:root[data-theme="dark"] td.c,
+html:root[data-theme="dark"] td.formatter, html:root[data-theme="dark"] .m td.formatter
+  { background-color: var(--surface); color: var(--text); border-color: var(--border); }
+html:root[data-theme="dark"] td.o, html:root[data-theme="dark"] .m td.o, html:root[data-theme="dark"] .m div.o,
+html:root[data-theme="dark"] div.o, html:root[data-theme="dark"] .m .tagline { background-color: var(--surface); color: var(--muted); }
+html:root[data-theme="dark"] .m td.l, html:root[data-theme="dark"] .m td.lm, html:root[data-theme="dark"] .m td.lp,
+html:root[data-theme="dark"] .m td.li, html:root[data-theme="dark"] td.l, html:root[data-theme="dark"] td.lm,
+html:root[data-theme="dark"] td.lp, html:root[data-theme="dark"] td.li { background-color: var(--bg); border-color: var(--border); }
+html:root[data-theme="dark"] .m TH.formatter { background-color: var(--surface-2); border-color: var(--border); }
+
+/* quotes */
+html:root[data-theme="dark"] .m blockquote.q, html:root[data-theme="dark"] .m div.q, html:root[data-theme="dark"] .m div blockquote.q
+  { background-color: var(--quote-bg); border-color: var(--quote-border); color: var(--text); }
+html:root[data-theme="dark"] .m blockquote.q:before { color: var(--quote-border); }
+html:root[data-theme="dark"] .m .lineQuote, html:root[data-theme="dark"] .m .lineQuote.level1 { color: #7ee787; }
+html:root[data-theme="dark"] .m .lineQuote.level2 { color: #e0c46c; }
+html:root[data-theme="dark"] .m .lineQuote.level3 { color: #dcbdfb; }
+html:root[data-theme="dark"] .m .tx { color: #7ee787; }
+
+/* code */
+html:root[data-theme="dark"] .m .c, html:root[data-theme="dark"] td.c .c, html:root[data-theme="dark"] .m tt
+  { background-color: var(--code-bg); border-color: var(--border); color: var(--code-text); }
+html:root[data-theme="dark"] .m .c code { color: var(--code-text); }
+html:root[data-theme="dark"] .m .kw  { color: var(--kw); }
+html:root[data-theme="dark"] .m .com { color: var(--com); font-style: italic; }
+html:root[data-theme="dark"] .m .str { color: var(--str); }
+
+/* links inside messages */
+html:root[data-theme="dark"] .m a:link, html:root[data-theme="dark"] .m a.m:link, html:root[data-theme="dark"] .m a.media:link
+  { color: var(--link); border-color: rgba(108,182,255,.35); }
+html:root[data-theme="dark"] .m a:visited, html:root[data-theme="dark"] .m a.m:visited, html:root[data-theme="dark"] .m a.media:visited
+  { color: var(--link-visited); border-color: rgba(176,131,240,.35); }
+html:root[data-theme="dark"] .m a:hover, html:root[data-theme="dark"] .m a.m:hover, html:root[data-theme="dark"] .m a.media:hover
+  { color: var(--link-hover); }
+
+/* misc */
+html:root[data-theme="dark"] .m div.mod { background-color: #3d1f22; color: #ffb3ad; }
+html:root[data-theme="dark"] .m .anonym { color: var(--danger); }
+html:root[data-theme="dark"] .msg-ver { background-color: #3a3020; color: var(--warn-text); }
+html:root[data-theme="dark"] .warn { background-color: var(--quote-bg); border-color: var(--quote-border); color: var(--warn-text); }
+html:root[data-theme="dark"] .page-num { background-color: var(--surface); border-color: var(--border); color: var(--link); }
+html:root[data-theme="dark"] .page-num.cur { color: var(--text-strong); background: transparent; }
+html:root[data-theme="dark"] .page-num.skip { color: var(--muted); background: transparent; }
+html:root[data-theme="dark"] .tags-box .tag.tag { color: var(--link) !important; background-color: #243447; }
+html:root[data-theme="dark"] .tags-box:before, html:root[data-theme="dark"] .pager:before,
+html:root[data-theme="dark"] .pager-val, html:root[data-theme="dark"] .paging-control,
+html:root[data-theme="dark"] .footer, html:root[data-theme="dark"] .info-page-header .page-menu span { color: var(--muted); }
+html:root[data-theme="dark"] .poll .title, html:root[data-theme="dark"] .poll .question { background-color: var(--surface-2); color: var(--text); }
+html:root[data-theme="dark"] .poll .choices tr:hover { background-color: var(--surface-3); }
+html:root[data-theme="dark"] .num-rate-tip .star, html:root[data-theme="dark"] .rate-bar .rate-val { color: #e0c46c; }
+
+/* ---- leftovers: flag frame and nick underline ---- */
+html:root[data-theme="dark"] .country-img { border-color: var(--border); }
+html:root[data-theme="dark"] a.hdr:not(:hover) { border-color: rgba(230,237,243,.35); }
+html:root[data-theme="dark"] .profile-tip, html:root[data-theme="dark"] .profile-tip-new,
+html:root[data-theme="dark"] .ip-addr { border-bottom-color: rgba(108,182,255,.4); }
+html:root[data-theme="dark"] a.hdr.profile-tip-new:not(:hover) { color: var(--text-strong); border-bottom-color: rgba(230,237,243,.35); }
+
+/* ---- icons ----
+   dark.css (now bundled into /bundles/css/site) recolours icons with green masks and keeps
+   adding ID-based selectors (#nav-tree img..., #ULRoot img...), so specificity alone cannot
+   win; icon filters here use !important.
+   1. Raster icons (tree, message list, list toolbar, pager, buttons) are colourful and read
+      fine on dark grey as they are: no filter.
+   2. SVG toolbars (top frame, message header) have hardcoded dark fills for a white
+      background: invert+hue-rotate flips lightness, keeps hue
+      (black -> white, navy -> light blue, dark red -> light red).
+   3. Already-bright SVGs (smile, warning, theme toggle) keep their colours. */
+html:root[data-theme="dark"] img,
+html:root[data-theme="dark"] input[type="image"],
+html:root[data-theme="dark"] #search-btn,
+html:root[data-theme="dark"] button#search-btn[data-action],
+html:root[data-theme="dark"] #hide-marker,
+html:root[data-theme="dark"] .hidden_Plus, html:root[data-theme="dark"] .hidden_Minus,
+html:root[data-theme="dark"] span.jqtree-circle,
+html:root[data-theme="dark"] #reg-box, html:root[data-theme="dark"] a.media,
+html:root[data-theme="dark"] .logo { filter: none !important; opacity: 1 !important; }
+
+html:root[data-theme="dark"] #site-toolbar svg.button,
+html:root[data-theme="dark"] #profile-toolbar svg.button,
+html:root[data-theme="dark"] .login-btn svg.button,
+html:root[data-theme="dark"] svg.icon {
+  filter: invert(1) hue-rotate(180deg) saturate(.9) !important;
+  opacity: .85 !important;
+  transition: opacity .15s;
+}
+html:root[data-theme="dark"] #site-toolbar svg.button:hover,
+html:root[data-theme="dark"] #profile-toolbar svg.button:hover,
+html:root[data-theme="dark"] a:hover > svg.icon { opacity: 1 !important; }
+html:root[data-theme="dark"] a.smile svg.icon,
+html:root[data-theme="dark"] a.report-btn svg.icon,
+html:root[data-theme="dark"] .theme-toggle svg { filter: none !important; }
+
+/* tree toolbar: "Карта сайта" + round buttons are font icons coloured via #ids */
+html:root[data-theme="dark"] #tree-toolbar-title,
+html:root[data-theme="dark"] #tree-toolbar-buttons a { color: var(--muted) !important; border-color: transparent !important; }
+html:root[data-theme="dark"] #tree-toolbar-buttons a:hover { color: var(--text-strong) !important; }
+
+/* ---- more ID-based leftovers from dark.css ---- */
+html:root[data-theme="dark"] #tbl a#curlink { color: var(--text-strong); }
+html:root[data-theme="dark"] #blogs .title-cell a { color: var(--link); }
+html:root[data-theme="dark"] #blogs .title-cell a:hover { color: var(--link-hover); }
+html:root[data-theme="dark"] #info-page-header,
+html:root[data-theme="dark"] .info-page-header { background-color: var(--surface); border-color: var(--border); }
+
+/* page header title + tabs are navigation: never "visited" purple */
+html:root[data-theme="dark"] .info-page-header .page-title a,
+html:root[data-theme="dark"] .info-page-header .page-title a:visited { color: var(--text-strong); }
+html:root[data-theme="dark"] .info-page-header .page-menu a,
+html:root[data-theme="dark"] .info-page-header .page-menu a:visited { color: var(--link); }
+html:root[data-theme="dark"] .info-page-header .page-menu a:hover { color: var(--text-strong); border-bottom-color: var(--accent); }
+
+/* footer: font icons are coloured separately from the links */
+html:root[data-theme="dark"] .footer2 .footer-column i,
+html:root[data-theme="dark"] .footer2 .icon,
+html:root[data-theme="dark"] .footer2 .social i { color: var(--muted); fill: var(--muted); }
+
+/* ---- reply / new message editor (NewMsg.aspx, newmsg bundle) ---- */
+html:root[data-theme="dark"] table.nm,
+html:root[data-theme="dark"] .nm, html:root[data-theme="dark"] .nml,
+html:root[data-theme="dark"] .m .nm, html:root[data-theme="dark"] .m .nml
+  { background-color: var(--bg); color: var(--muted); }
+html:root[data-theme="dark"] input.nm, html:root[data-theme="dark"] textarea.nm,
+html:root[data-theme="dark"] .m input.nm, html:root[data-theme="dark"] .m textarea.nm
+  { background-color: var(--surface); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] .nmb, html:root[data-theme="dark"] .m .nmb
+  { background-color: var(--surface-2); border-color: var(--border); color: var(--text); }
+html:root[data-theme="dark"] .nml a, html:root[data-theme="dark"] .nm a { color: var(--link); }
+
+/* ---- /forum topics page: unread badge, pager ---- */
+/* the badge is a <span> inside .page-menu, so the generic ".page-menu span { grey }" rule
+   hit it too: grey digits on red (1.6:1). White on #da3633 = 4.6:1. */
+html:root[data-theme="dark"] .info-page-header .page-menu .new-count { color: #fff; background: #da3633; border-color: transparent; }
+html:root[data-theme="dark"] .pager { color: var(--text); }
+html:root[data-theme="dark"] .pager .pager-btn { color: var(--link); }
+html:root[data-theme="dark"] .pager .pager-btn:hover { color: var(--link-hover); }
+html:root[data-theme="dark"] .info-page-content table tr:last-child td,
+html:root[data-theme="dark"] .info-page-content table td:first-child,
+html:root[data-theme="dark"] .info-page-content table td:last-child { border-color: var(--border); }
+
+/* ---- new site header (_SiteHeader2, blue bar on /forum etc.) ----
+   menu links and the nick are white in the light theme; the generic dark link colours
+   (blue / visited purple) are unreadable on the blue bar */
+html:root[data-theme="dark"] .site-header a,
+html:root[data-theme="dark"] .site-header a:visited,
+html:root[data-theme="dark"] .site-header .display-name { color: #fff; border-bottom-color: transparent; }
+html:root[data-theme="dark"] .site-header a:hover { color: #fff; opacity: .8; }
